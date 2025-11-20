@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 30px 50px;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .login-form h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--branco);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-weight: normal;
+            text-align: center;
+            color: var(--branco);
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-weight: normal;
+            color: var(--branco);
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--branco);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--branco);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--branco);
+            color: var(--rosa-principal);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--branco);
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .register-link a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--branco);
+            transition: width 0.3s ease;
+        }
+
+        .register-link a:hover::after {
+            width: 100%;
+        }
+
+        .register-link a:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html" class="active">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="questoes.php">Teste</a></li>
+                        <li><a href="aptidoes.html">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="login-container">
+        <div class="container">
+            <form class="login-form" action="../backend/logar.php" method="post">
+                <h2>Gloway</h2>
+                <p class="login-subtitle">Entre na sua conta.</p>
+                
+                <div class="form-group">
+                    <label for="email">Nome de usuário</label>
+                    <input type="text" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+                
+                <button type="submit" class="login-btn">ENTRAR</button>
+                
+                <div class="register-link">
+                    Não tem uma conta? <a href="cadastrar.html">Cadastre-se</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>

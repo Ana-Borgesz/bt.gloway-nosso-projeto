@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Aptidão - Gloway</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container-teste-modal {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 30px 50px;
+        }
+
+        .conteudo-teste-modal {
+            text-align: center;
+            animation: aparecer-subindo 0.8s ease-out;
+        }
+
+        .conteudo-teste-modal h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .conteudo-teste-modal p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .botao-iniciar-teste {
+            background: var(--branco);
+            color: var(--rosa-principal);
+            border: none;
+            border-radius: 50px;
+            padding: 16px 40px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .botao-iniciar-teste:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Modal de Login */
+        .modal-login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-login.mostrar {
+            display: flex;
+            animation: aparecer-modal 0.3s ease-out;
+        }
+
+        @keyframes aparecer-modal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .conteudo-modal {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .conteudo-modal h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            color: var(--rosa-principal);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .conteudo-modal p {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .botoes-modal {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .botao-modal {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .botao-principal {
+            background: var(--rosa-principal);
+            color: var(--branco);
+        }
+
+        .botao-secundario {
+            background: transparent;
+            color: var(--rosa-principal);
+            border: 2px solid var(--rosa-principal);
+        }
+
+        .botao-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes aparecer-subindo {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="teste-com-modal.html" class="active">Teste</a></li>
+                        <li><a href="aptidoes.html">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="container-teste-modal">
+        <div class="container">
+            <div class="conteudo-teste-modal">
+                <h1>Teste de Aptidão Profissional</h1>
+                <p>Descubra suas aptidões e encontre a carreira perfeita para você</p>
+                <button class="botao-iniciar-teste" id="botao-iniciar-teste">Iniciar Teste</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Login -->
+    <div class="modal-login" id="modal-login">
+        <div class="conteudo-modal">
+            <h2>Login Necessário</h2>
+            <p>Para realizar o teste de aptidão, você precisa estar logado em sua conta.</p>
+            <div class="botoes-modal">
+                <a href="cadastrar.html" class="botao-modal botao-principal">Criar Conta</a>
+                <a href="login.html" class="botao-modal botao-secundario">Fazer Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostra modal quando clicar no botão
+        document.getElementById('botao-iniciar-teste').addEventListener('click', mostrarModal);
+
+        function mostrarModal() {
+            document.getElementById('modal-login').classList.add('mostrar');
+        }
+
+        // Fecha modal ao clicar fora
+        document.getElementById('modal-login').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('mostrar');
+            }
+        });
+
+        // Cria partículas
+        function criarParticulas() {
+            const container = document.getElementById('particulas');
+            const numero = 15;
+            
+            for (let i = 0; i < numero; i++) {
+                const particula = document.createElement('div');
+                particula.className = 'particula';
+                
+                const tamanho = Math.random() * 6 + 2;
+                const esquerda = Math.random() * 100;
+                const duracao = Math.random() * 20 + 20;
+                const atraso = Math.random() * -30;
+                
+                particula.style.cssText = `
+                    width: ${tamanho}px;
+                    height: ${tamanho}px;
+                    left: ${esquerda}%;
+                    top: ${Math.random() * 100}%;
+                    animation-duration: ${duracao}s;
+                    animation-delay: ${atraso}s;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1});
+                `;
+                
+                container.appendChild(particula);
+            }
+        }
+
+        criarParticulas();
+    </script>
+
+</body>
+</html>

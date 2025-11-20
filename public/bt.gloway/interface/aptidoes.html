@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloway - Aptidões</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        .aptidoes-container {
+            min-height: 100vh;
+            position: relative;
+            padding: 150px 30px 50px;
+        }
+
+        .aptidoes-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .aptidoes-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .aptidoes-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .aptidoes-header p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .aptidoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .aptidao-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            text-align: center;
+        }
+
+        .aptidao-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .aptidao-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--branco);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--rosa-principal);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .aptidao-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--branco);
+        }
+
+        .aptidao-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            min-height: 80px;
+        }
+
+        .ver-profissoes-btn {
+            background: var(--branco);
+            color: var(--rosa-principal);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ver-profissoes-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .aptidoes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .aptidoes-header h1 {
+                font-size: 32px;
+            }
+            
+            .aptidao-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="questoes.php">Teste</a></li>
+                        <li><a href="aptidoes.html" class="active">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="aptidoes-container">
+        <div class="container">
+            <div class="aptidoes-content">
+                <div class="aptidoes-header">
+                    <h1>Descubra suas Aptidões</h1>
+                    <p>Explore as diferentes áreas profissionais e encontre o caminho que combina com seu perfil</p>
+                </div>
+
+                <div class="aptidoes-grid">
+                    <!-- Investigativo -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">🔍</div>
+                        <h2>Investigativo</h2>
+                        <p>Pessoas analíticas, curiosas e que gostam de pesquisar, investigar e resolver problemas complexos através do pensamento lógico e científico.</p>
+                        <a href="profissoes.html?aptidao=1" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+
+                    <!-- Realístico -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">🔧</div>
+                        <h2>Realístico</h2>
+                        <p>Indivíduos práticos, que preferem trabalhar com ferramentas, máquinas e objetos concretos, valorizando habilidades manuais e técnicas.</p>
+                        <a href="profissoes.html?aptidao=2" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+
+                    <!-- Artístico -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">🎨</div>
+                        <h2>Artístico</h2>
+                        <p>Pessoas criativas, inovadoras e expressivas que gostam de trabalhar em ambientes não estruturados, usando imaginação e talento artístico.</p>
+                        <a href="profissoes.html?aptidao=3" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+
+                    <!-- Social -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">🤝</div>
+                        <h2>Social</h2>
+                        <p>Indivíduos que gostam de ajudar, ensinar, orientar e trabalhar com pessoas, possuindo forte empatia e habilidades de comunicação.</p>
+                        <a href="profissoes.html?aptidao=4" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+
+                    <!-- Empreendedor -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">💼</div>
+                        <h2>Empreendedor</h2>
+                        <p>Pessoas persuasivas, ambiciosas e que gostam de liderar, tomar riscos calculados e influenciar outros para alcançar objetivos organizacionais.</p>
+                        <a href="profissoes.html?aptidao=5" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+
+                    <!-- Convencional -->
+                    <div class="aptidao-card">
+                        <div class="aptidao-icon">📊</div>
+                        <h2>Convencional</h2>
+                        <p>Indivíduos organizados, metódicos e que preferem trabalhos estruturados, seguindo procedimentos estabelecidos e lidando com dados.</p>
+                        <a href="profissoes.html?aptidao=6" class="ver-profissoes-btn">Ver Profissões</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript para controlar os modais. obs: modais são esses quadrados que vão aparecendo 
+        // na tela em algumas ações, sendo essas o selecionar aptidões, entrar e cadastrar, 
+        // - ass: laurão <3
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos dos modais
+            const loginModal = document.getElementById('loginModal');
+            const cadastroModal = document.getElementById('cadastroModal');
+
+            // Botões de abrir
+            const openLoginBtn = document.getElementById('openLoginModal');
+            const openCadastroBtn = document.getElementById('openCadastroModal');
+
+            // Botões de fechar
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            const closeCadastroBtn = document.getElementById('closeCadastroModal');
+
+            // Links entre modais
+            const openCadastroFromLogin = document.getElementById('openCadastroFromLogin');
+            const openLoginFromCadastro = document.getElementById('openLoginFromCadastro');
+
+            // Função para abrir modal
+            function openModal(modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Função para fechar modal
+            function closeModal(modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Abrir modais
+            openLoginBtn.addEventListener('click', () => openModal(loginModal));
+            openCadastroBtn.addEventListener('click', () => openModal(cadastroModal));
+
+            // Fechar modais
+            closeLoginBtn.addEventListener('click', () => closeModal(loginModal));
+            closeCadastroBtn.addEventListener('click', () => closeModal(cadastroModal));
+
+            // Navegação entre modais de login/cadastro
+            openCadastroFromLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(loginModal);
+                openModal(cadastroModal);
+            });
+
+            openLoginFromCadastro.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(cadastroModal);
+                openModal(loginModal);
+            });
+
+            // Fechar modais ao clicar fora
+            [loginModal, cadastroModal].forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            // Fechar modais com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('show')) closeModal(loginModal);
+                    if (cadastroModal.classList.contains('show')) closeModal(cadastroModal);
+                }
+            });
+
+            function criarParticulas() {
+                const particulasContainer = document.getElementById('particulas');
+                const numeroParticulas = 20;
+                
+                for (let i = 0; i < numeroParticulas; i++) {
+                    const particula = document.createElement('div');
+                    particula.className = 'particula';
+                    particula.style.left = Math.random() * 100 + 'vw';
+                    particula.style.animationDelay = Math.random() * 20 + 's';
+                    particula.style.width = Math.random() * 4 + 2 + 'px';
+                    particula.style.height = particula.style.width;
+                    particulasContainer.appendChild(particula);
+                }
+            }
+            
+            criarParticulas();
+        });
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>

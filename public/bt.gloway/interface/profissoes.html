@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloway - Profissões</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        .profissoes-container {
+            min-height: 100vh;
+            position: relative;
+            padding: 150px 30px 50px;
+        }
+
+        .profissoes-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .profissoes-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .profissoes-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profissoes-header p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .voltar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--branco);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .voltar-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .profissoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .profissao-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            text-align: center;
+        }
+
+        .profissao-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .profissao-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--branco);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ver-mais-btn {
+            background: var(--branco);
+            color: var(--rosa-principal);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ver-mais-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profissoes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .profissoes-header h1 {
+                font-size: 32px;
+            }
+            
+            .profissao-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="questoes.php">Teste</a></li>
+                        <li><a href="aptidoes.html" class="active">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="profissoes-container">
+        <div class="container">
+            <div class="profissoes-content">
+                <a href="aptidoes.html" class="voltar-btn">← Voltar para Aptidões</a>
+                
+                <div class="profissoes-header">
+                    <h1 id="aptidao-titulo">Profissões</h1>
+                    <p id="aptidao-descricao">Explore as carreiras disponíveis nesta área</p>
+                </div>
+
+                <div class="profissoes-grid" id="profissoes-lista">
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Dados das profissões organizadas por aptidão
+        const profissoesPorAptidao = {
+            1: {
+                titulo: "Investigativo",
+                descricao: "Profissões para mentes curiosas e analíticas",
+                profissoes: [
+                    { id: 1, nome: "Médico" },
+                    { id: 2, nome: "Pesquisador Científico" },
+                    { id: 3, nome: "Engenheiro de Software" },
+                    { id: 4, nome: "Físico" },
+                    { id: 5, nome: "Biólogo" },
+                    { id: 6, nome: "Químico" },
+                    { id: 7, nome: "Engenheiro de Dados" },
+                    { id: 8, nome: "Matemático" },
+                    { id: 9, nome: "Astrônomo" },
+                    { id: 10, nome: "Geneticista" }
+                ]
+            },
+            2: {
+                titulo: "Realístico", 
+                descricao: "Profissões para pessoas práticas e técnicas",
+                profissoes: [
+                    { id: 11, nome: "Engenheiro Civil" },
+                    { id: 12, nome: "Técnico em Eletrônica" },
+                    { id: 13, nome: "Arquiteto" },
+                    { id: 14, nome: "Engenheiro Elétrico" },
+                    { id: 15, nome: "Técnico em Mecânica" },
+                    { id: 16, nome: "Engenheiro de Materiais" },
+                    { id: 17, nome: "Projetista de Produtos" },
+                    { id: 18, nome: "Engenheiro Mecânico" },
+                    { id: 19, nome: "Gestor de Produção" },
+                    { id: 20, nome: "Técnico em Automação Industrial" }
+                ]
+            },
+            3: {
+                titulo: "Artístico",
+                descricao: "Profissões para mentes criativas e inovadoras", 
+                profissoes: [
+                    { id: 21, nome: "Designer Gráfico" },
+                    { id: 22, nome: "Publicitário" },
+                    { id: 23, nome: "Estilista" },
+                    { id: 24, nome: "Fotógrafo" },
+                    { id: 25, nome: "Artista Plástico" },
+                    { id: 26, nome: "Design de Interiores" },
+                    { id: 27, nome: "Diretor de Arte" },
+                    { id: 28, nome: "Animador 3D" },
+                    { id: 29, nome: "Jornalista" },
+                    { id: 30, nome: "Cineasta" }
+                ]
+            },
+            4: {
+                titulo: "Social",
+                descricao: "Profissões para quem gosta de ajudar pessoas",
+                profissoes: [
+                    { id: 31, nome: "Professor de Ensino Fundamental" },
+                    { id: 32, nome: "Psicoterapeuta" },
+                    { id: 33, nome: "Assistente Social" },
+                    { id: 34, nome: "Fonoaudiólogo" },
+                    { id: 35, nome: "Técnico de Enfermagem" },
+                    { id: 36, nome: "Técnico em Radiologia" },
+                    { id: 37, nome: "Terapeuta Ocupacional" },
+                    { id: 38, nome: "Educador Físico" },
+                    { id: 39, nome: "Psicopedagogo" },
+                    { id: 40, nome: "Educador Social" }
+                ]
+            },
+            5: {
+                titulo: "Empreendedor",
+                descricao: "Profissões para líderes e estrategistas",
+                profissoes: [
+                    { id: 41, nome: "Consultor Empresarial" },
+                    { id: 42, nome: "Gestor de Projetos" },
+                    { id: 43, nome: "Franqueador" },
+                    { id: 44, nome: "Empreendedor Digital" },
+                    { id: 45, nome: "Criador de Conteúdo" },
+                    { id: 46, nome: "Coach de Carreira" },
+                    { id: 47, nome: "Especialista em Branding" },
+                    { id: 48, nome: "Consultor de Inovação" },
+                    { id: 49, nome: "Planejador Financeiro" },
+                    { id: 50, nome: "Desenvolvedor de Startups" }
+                ]
+            },
+            6: {
+                titulo: "Convencional",
+                descricao: "Profissões para pessoas organizadas e metódicas",
+                profissoes: [
+                    { id: 51, nome: "Contador" },
+                    { id: 52, nome: "Advogado" },
+                    { id: 53, nome: "Secretário Executivo" },
+                    { id: 54, nome: "Analista de Recursos Humanos" },
+                    { id: 55, nome: "Auditor Interno" },
+                    { id: 56, nome: "Técnico de Logística" },
+                    { id: 57, nome: "Gerente de Banco" },
+                    { id: 58, nome: "Consultor de Vendas" },
+                    { id: 59, nome: "Recepcionista" },
+                    { id: 60, nome: "Supervisor de Produção" }
+                ]
+            }
+        };
+
+        // Carregar profissões baseado no parâmetro da URL
+        function carregarProfissoes() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const aptidaoId = parseInt(urlParams.get('aptidao')) || 1;
+            
+            const aptidao = profissoesPorAptidao[aptidaoId];
+            
+            if (aptidao) {
+                document.getElementById('aptidao-titulo').textContent = `Profissões - ${aptidao.titulo}`;
+                document.getElementById('aptidao-descricao').textContent = aptidao.descricao;
+                
+                const profissoesLista = document.getElementById('profissoes-lista');
+                profissoesLista.innerHTML = '';
+                
+                aptidao.profissoes.forEach(profissao => {
+                    const card = document.createElement('div');
+                    card.className = 'profissao-card';
+                    card.innerHTML = `
+                        <h3>${profissao.nome}</h3>
+                        <a href="profissao-detalhes.html?id=${profissao.id}" class="ver-mais-btn">Ver Mais</a>
+                    `;
+                    profissoesLista.appendChild(card);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarProfissoes);
+    </script>
+
+        <script>
+        // JavaScript para controlar os modais. obs: modais são esses quadrados que vão aparecendo 
+        // na tela em algumas ações, sendo essas o selecionar aptidões, entrar e cadastrar, 
+        // - ass: laurão <3
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos dos modais
+            const loginModal = document.getElementById('loginModal');
+            const cadastroModal = document.getElementById('cadastroModal');
+
+            // Botões de abrir
+            const openLoginBtn = document.getElementById('openLoginModal');
+            const openCadastroBtn = document.getElementById('openCadastroModal');
+
+            // Botões de fechar
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            const closeCadastroBtn = document.getElementById('closeCadastroModal');
+
+            // Links entre modais
+            const openCadastroFromLogin = document.getElementById('openCadastroFromLogin');
+            const openLoginFromCadastro = document.getElementById('openLoginFromCadastro');
+
+            // Função para abrir modal
+            function openModal(modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Função para fechar modal
+            function closeModal(modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Abrir modais
+            openLoginBtn.addEventListener('click', () => openModal(loginModal));
+            openCadastroBtn.addEventListener('click', () => openModal(cadastroModal));
+
+            // Fechar modais
+            closeLoginBtn.addEventListener('click', () => closeModal(loginModal));
+            closeCadastroBtn.addEventListener('click', () => closeModal(cadastroModal));
+
+            // Navegação entre modais de login/cadastro
+            openCadastroFromLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(loginModal);
+                openModal(cadastroModal);
+            });
+
+            openLoginFromCadastro.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(cadastroModal);
+                openModal(loginModal);
+            });
+
+            // Fechar modais ao clicar fora
+            [loginModal, cadastroModal].forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            // Fechar modais com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('show')) closeModal(loginModal);
+                    if (cadastroModal.classList.contains('show')) closeModal(cadastroModal);
+                }
+            });
+
+            function criarParticulas() {
+                const particulasContainer = document.getElementById('particulas');
+                const numeroParticulas = 20;
+                
+                for (let i = 0; i < numeroParticulas; i++) {
+                    const particula = document.createElement('div');
+                    particula.className = 'particula';
+                    particula.style.left = Math.random() * 100 + 'vw';
+                    particula.style.animationDelay = Math.random() * 20 + 's';
+                    particula.style.width = Math.random() * 4 + 2 + 'px';
+                    particula.style.height = particula.style.width;
+                    particulasContainer.appendChild(particula);
+                }
+            }
+            
+            criarParticulas();
+        });
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>

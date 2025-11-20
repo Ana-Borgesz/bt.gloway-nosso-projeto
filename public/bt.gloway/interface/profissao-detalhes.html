@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloway - Detalhes da Profissão</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        .detalhes-container {
+            min-height: 100vh;
+            position: relative;
+            padding: 150px 30px 50px;
+        }
+
+        .detalhes-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .voltar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--branco);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .voltar-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .profissao-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .profissao-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profissao-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profissao-tipo {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .profissao-info {
+            margin-bottom: 40px;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+        }
+
+        .info-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--branco);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .etapas-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .etapas-list li {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .etapas-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--branco);
+            font-weight: bold;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profissao-card {
+                padding: 30px 25px;
+            }
+
+            .profissao-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="questoes.php">Teste</a></li>
+                        <li><a href="aptidoes.html" class="active">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="detalhes-container">
+        <div class="container">
+            <div class="detalhes-content">
+                <a href="#" class="voltar-btn" id="voltar-link">← Voltar para Profissões</a>
+
+                <div class="profissao-card">
+                    <div class="profissao-header">
+                        <h1 id="profissao-nome">Carregando...</h1>
+                        <div class="profissao-tipo" id="profissao-tipo"></div>
+                    </div>
+
+                    <div class="profissao-info">
+                        <div class="info-section">
+                            <h3>Descrição</h3>
+                            <p id="profissao-descricao">Carregando descrição...</p>
+                        </div>
+
+                        <div class="info-section">
+                            <h3>Como se Tornar</h3>
+                            <ul class="etapas-list" id="profissao-etapas">
+                                <li>Carregando informações...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        const detalhesProfissoes = {
+            // Investigativo (1-10)
+            1: { nome: "Médico", tipo: "Investigativo", descricao: "Profissional da saúde que diagnostica, trata e previne doenças e lesões, atuando em hospitais, clínicas e serviços de saúde para promover o bem‑estar da população.", etapas: ["Concluir o curso de Medicina (6 anos)", "Cumprir internato e realizar residência médica (2-4 anos) para especialização", "Obter registro no Conselho Regional de Medicina (CRM)", "Atualizar-se com cursos, congressos e pesquisa científica"] },
+            2: { nome: "Pesquisador Científico", tipo: "Investigativo", descricao: "Profissional que planeja e executa estudos experimentais ou teóricos para gerar conhecimento e soluções em áreas como biologia, física, química e ciências sociais.", etapas: ["Concluir graduação em área científica (Biologia, Física, Química etc.)", "Fazer mestrado e doutorado para formação avançada", "Publicar artigos e buscar financiamento para projetos", "Atuar em universidades, centros de pesquisa ou indústrias"] },
+            3: { nome: "Engenheiro de Software", tipo: "Investigativo", descricao: "Profissional que projeta, desenvolve e mantém sistemas e aplicações, aplicando práticas de engenharia de software e metodologias ágeis para construir produtos confiáveis.", etapas: ["Concluir curso de Ciência da Computação, Engenharia de Software ou similar (4-5 anos)", "Aprender linguagens, estruturas de dados e arquitetura de software", "Acumular experiência em projetos, estágio e contribuição a código aberto", "Especializar-se em áreas como backend, frontend, mobile ou DevOps"] },
+            4: { nome: "Físico", tipo: "Investigativo", descricao: "Profissional que estuda fenômenos naturais, desenvolvendo teorias e experimentos para entender as leis da natureza e aplicá-las na tecnologia e indústria.", etapas: ["Concluir graduação em Física (4-5 anos)", "Realizar mestrado e/ou doutorado para pesquisa avançada", "Trabalhar em universidades, centros de pesquisa ou indústria tecnológica", "Divulgar pesquisas e colaborar em projetos multidisciplinares"] },
+            5: { nome: "Biólogo", tipo: "Investigativo", descricao: "Profissional que investiga organismos vivos, ecossistemas e processos biológicos, aplicando conhecimentos à conservação, saúde e biotecnologia.", etapas: ["Concluir graduação em Biologia (4-5 anos)", "Participar de estágios e projetos de campo ou laboratório", "Especializar-se via pós-graduação (mestrado/doutorado)", "Atuar em pesquisa, controle ambiental, saúde pública ou indústria"] },
+            6: { nome: "Químico", tipo: "Investigativo", descricao: "Profissional que estuda substâncias, suas propriedades e reações, desenvolvendo processos e produtos na indústria, saúde e meio ambiente.", etapas: ["Concluir graduação em Química (4-5 anos)", "Realizar estágios em laboratórios e indústrias", "Aprimorar-se com pós-graduação e certificações técnicas", "Atuar em P&D, controle de qualidade ou consultoria técnica"] },
+            7: { nome: "Engenheiro de Dados", tipo: "Investigativo", descricao: "Profissional responsável por projetar pipelines, organizar e garantir qualidade de dados para análise e modelos de machine learning em grandes volumes de informação.", etapas: ["Concluir curso em Ciência da Computação, Engenharia ou Análise de Dados (4 anos)", "Aprender bancos de dados, ETL, processamento distribuído e cloud", "Fazer estágios e projetos práticos em empresas de tecnologia", "Especializar-se em arquitetura de dados, segurança e governança"] },
+            8: { nome: "Matemático", tipo: "Investigativo", descricao: "Profissional que aplica teorias e métodos matemáticos para modelar problemas e desenvolver soluções em ciência, finanças, tecnologia e engenharia.", etapas: ["Concluir graduação em Matemática (4-5 anos)", "Realizar pós-graduação (mestrado/doutorado) para pesquisa ou ensino", "Participar de projetos aplicados em indústria ou ciência", "Trabalhar em centros de pesquisa, consultoria matemática ou ensino"] },
+            9: { nome: "Astrônomo", tipo: "Investigativo", descricao: "Profissional que estuda objetos e fenômenos do universo, utilizando observatórios e técnicas de análise para entender estrelas, planetas e galáxias.", etapas: ["Concluir graduação em Astronomia ou Física (4-5 anos)", "Realizar mestrado e doutorado com foco em pesquisa observacional ou teórica", "Participar de projetos em observatórios e colaborações internacionais", "Divulgar resultados e atuar em pesquisa, educação e observatórios"] },
+            10: { nome: "Geneticista", tipo: "Investigativo", descricao: "Profissional que estuda genes, hereditariedade e variações genéticas, aplicando conhecimentos em pesquisa, biotecnologia e saúde humana ou animal.", etapas: ["Concluir graduação em Biologia, Biomedicina ou Ciências Biomédicas (4-5 anos)", "Fazer pós-graduação (mestrado e/ou doutorado) em genética ou genômica", "Atuar em laboratórios de pesquisa, clínicas ou indústria farmacêutica", "Realizar estudos de sequenciamento, edição genética e aconselhamento genético"] },
+
+            // Realístico (11-20)
+            11: { nome: "Engenheiro Civil", tipo: "Realístico", descricao: "Profissional que projeta, coordena e supervisiona obras de infraestrutura, avaliando segurança, viabilidade técnica e impacto ambiental.", etapas: ["Concluir curso de Engenharia Civil (5 anos)", "Participar de estágios e projetos práticos em construção", "Obter registro no CREA e capacitações técnicas", "Especializar-se em estruturas, geotecnia, saneamento ou transportes"] },
+            12: { nome: "Técnico em Eletrônica", tipo: "Realístico", descricao: "Profissional que instala, repara e mantém equipamentos eletrônicos, atuando em manutenção, automação e telecomunicações.", etapas: ["Concluir curso técnico em Eletrônica (2-3 anos)", "Realizar estágios em oficinas ou indústrias", "Obter certificações específicas e experiência prática", "Atuar em manutenção, suporte técnico ou montagem de equipamentos"] },
+            13: { nome: "Arquiteto", tipo: "Realístico", descricao: "Profissional que planeja e projeta espaços construídos, equilibrando necessidades funcionais, estética e normas urbanísticas.", etapas: ["Concluir curso de Arquitetura e Urbanismo (5 anos)", "Desenvolver portfólio com projetos acadêmicos e estágios", "Obter registro no CAU e atuar em escritórios", "Especializar-se em restauração, paisagismo, urbanismo ou interiores"] },
+            14: { nome: "Engenheiro Elétrico", tipo: "Realístico", descricao: "Profissional que projeta e implementa sistemas elétricos e eletrônicos, desde instalações industriais até projetos de geração e distribuição de energia.", etapas: ["Concluir curso de Engenharia Elétrica (5 anos)", "Fazer estágios em empresas do setor elétrico", "Obter registro no CREA e certificações técnicas", "Atuar em energia, automação, eletrônica ou telecomunicações"] },
+            15: { nome: "Técnico em Mecânica", tipo: "Realístico", descricao: "Profissional que executa manutenção, ajuste e instalação de sistemas mecânicos, contribuindo para o funcionamento de máquinas e veículos.", etapas: ["Concluir curso técnico em Mecânica (2-3 anos)", "Realizar estágios em oficinas ou indústrias", "Obter habilidades em leitura de desenhos e calibração de equipamentos", "Atuar em manutenção industrial, automotiva ou produção"] },
+            16: { nome: "Engenheiro de Materiais", tipo: "Realístico", descricao: "Profissional que pesquisa e desenvolve materiais (metais, cerâmicas, polímeros) para aplicações industriais e tecnológicas.", etapas: ["Concluir curso de Engenharia de Materiais ou Engenharia Química (5 anos)", "Participar de P&D em laboratórios e indústrias", "Realizar pós-graduação para aprofundamento técnico", "Atuar em desenvolvimento de materiais, qualidade e inovação"] },
+            17: { nome: "Projetista de Produtos", tipo: "Realístico", descricao: "Profissional que projeta produtos considerando ergonomia, funcionalidade e produção, transformando ideias em protótipos viáveis.", etapas: ["Concluir curso de Design de Produto ou Engenharia (4-5 anos)", "Desenvolver protótipos e testes de usabilidade", "Realizar estágios em empresas de desenvolvimento de produto", "Trabalhar em P&D, design industrial ou consultoria técnica"] },
+            18: { nome: "Engenheiro Mecânico", tipo: "Realístico", descricao: "Profissional que projeta e otimiza máquinas, sistemas térmicos e equipamentos, aplicando princípios de mecânica, termodinâmica e materiais.", etapas: ["Concluir curso de Engenharia Mecânica (5 anos)", "Participar de estágios em indústrias de manufatura", "Aprimorar conhecimentos em CAD, simulação e fabricação", "Atuar em automotiva, aeroespacial, indústria e manutenção"] },
+            19: { nome: "Gestor de Produção", tipo: "Realístico", descricao: "Profissional que planeja, organiza e controla processos produtivos, garantindo eficiência, qualidade e cumprimento de prazos.", etapas: ["Concluir curso de Engenharia de Produção ou Administração (4-5 anos)", "Realizar estágios em fábricas e plantas industriais", "Aprender ferramentas de planejamento e controle de produção", "Atuar como coordenador, supervisor ou gerente de produção"] },
+            20: { nome: "Técnico em Automação Industrial", tipo: "Realístico", descricao: "Profissional que implementa sistemas automatizados para otimizar processos industriais, integrando sensores, atuadores e controladores.", etapas: ["Concluir curso técnico em Automação (2-3 anos)", "Aprender PLCs, redes industriais e instrumentação", "Realizar estágios em empresas do setor", "Atuar em indústria, manutenção e integração de sistemas"] },
+
+            // Artístico (21-30)
+            21: { nome: "Designer Gráfico", tipo: "Artístico", descricao: "Profissional que comunica visualmente ideias e marcas, criando identidades, peças publicitárias e interfaces digitais atraentes e funcionais.", etapas: ["Concluir curso de Design Gráfico ou Publicidade (3-4 anos)", "Desenvolver portfólio com projetos reais ou pessoais", "Aprender ferramentas de edição e tipografia", "Trabalhar em agências, estúdios ou como freelancer"] },
+            22: { nome: "Publicitário", tipo: "Artístico", descricao: "Profissional que cria campanhas e estratégias de comunicação para promover marcas, produtos e serviços, combinando criatividade e análise de mercado.", etapas: ["Concluir curso de Publicidade e Propaganda (4 anos)", "Realizar estágio em agências e participar de campanhas", "Aprender planejamento estratégico e redação publicitária", "Atuar em criação, atendimento, mídia ou gestão de marcas"] },
+            23: { nome: "Estilista", tipo: "Artístico", descricao: "Profissional que cria coleções de moda, interpretando tendências, materiais e público-alvo para desenvolver peças comerciais e autorais.", etapas: ["Concluir curso de Moda ou Design de Moda (3-4 anos)", "Montar portfólio e realizar desfiles ou editoriais", "Aprender modelagem, costura e mercado de moda", "Trabalhar em marcas, ateliês ou lançar coleção própria"] },
+            24: { nome: "Fotógrafo", tipo: "Artístico", descricao: "Profissional que captura imagens para registrar momentos, promover marcas ou contar histórias, usando técnica e sensibilidade estética.", etapas: ["Concluir curso técnico ou graduação em Fotografia (2-4 anos)", "Desenvolver portfólio e especializar-se em nichos (evento, moda, publicidade)", "Aprender edição e fluxo de pós‑produção", "Atuar como freelancer, estúdio ou em veículos de comunicação"] },
+            25: { nome: "Artista Plástico", tipo: "Artístico", descricao: "Profissional que cria obras visuais usando pintura, escultura, gravura e outras técnicas, explorando linguagem artística e mercado cultural.", etapas: ["Concluir curso de Artes Visuais ou especialização (4 anos)", "Construir portfólio e participar de exposições", "Buscar residências artísticas e editais", "Trabalhar como artista autônomo, galerias ou projetos culturais"] },
+            26: { nome: "Design de Interiores", tipo: "Artístico", descricao: "Profissional que projeta ambientes internos com foco em estética, conforto e funcionalidade, atendendo residências e espaços comerciais.", etapas: ["Concluir curso de Design de Interiores ou Arquitetura (4 anos)", "Desenvolver portfólio e projetos reais", "Estagiar em escritórios de arquitetura ou design", "Atuar como freelancer ou em escritórios de projetos"] },
+            27: { nome: "Diretor de Arte", tipo: "Artístico", descricao: "Profissional que lidera a identidade visual de peças publicitárias e projetos criativos, coordenando equipes de design e produção.", etapas: ["Concluir curso de Design, Publicidade ou áreas afins (4 anos)", "Acumular experiência em agências e projetos visuais", "Construir portfólio de campanhas e direção criativa", "Atuar como diretor de arte em agências ou estúdios"] },
+            28: { nome: "Animador 3D", tipo: "Artístico", descricao: "Profissional que cria animações tridimensionais para filmes, jogos e publicidade, combinando modelagem, rigging e animação técnica.", etapas: ["Concluir curso em Animação, Design ou Multimídia (3-4 anos)", "Aprender softwares 3D (Maya, Blender, 3ds Max)", "Desenvolver showreel e participar de projetos colaborativos", "Trabalhar em estúdios, produtoras ou como freelancer"] },
+            29: { nome: "Jornalista", tipo: "Artístico", descricao: "Profissional que apura, produz e edita conteúdos jornalísticos, informando o público em diferentes plataformas com ética e clareza.", etapas: ["Concluir curso de Jornalismo (4 anos)", "Fazer estágios em redações e veículos de mídia", "Desenvolver habilidades de apuração, escrita e multimídia", "Trabalhar em jornais, rádio, TV, online ou como repórter freelancer"] },
+            30: { nome: "Cineasta", tipo: "Artístico", descricao: "Profissional que cria e dirige produções audiovisuais, coordenando roteiro, direção, fotografia e equipe técnica para contar histórias em vídeo.", etapas: ["Concluir curso de Cinema, Audiovisual ou produção (4 anos)", "Realizar curtas e projetos práticos para portfólio", "Participar de festivais e networking no setor", "Trabalhar em produtoras, estúdios ou como diretor independente"] },
+
+            // Social (31-40)
+            31: { nome: "Professor de Ensino Fundamental", tipo: "Social", descricao: "Profissional que planeja e executa atividades pedagógicas para o desenvolvimento cognitivo e social de crianças, promovendo aprendizagem significativa.", etapas: ["Concluir Licenciatura ou Pedagogia (4 anos)", "Realizar estágio supervisionado em escolas", "Obter certificação e registro quando necessário", "Participar de formação continuada e metodologias ativas"] },
+            32: { nome: "Psicoterapeuta", tipo: "Social", descricao: "Profissional que realiza avaliação e intervenção psicoterapêutica para apoiar a saúde mental e o bem-estar emocional de indivíduos e grupos.", etapas: ["Concluir graduação em Psicologia (5 anos)", "Fazer estágio clínico e supervisão", "Realizar especialização em abordagem terapêutica", "Atuar em clínicas, hospitais ou consultórios particulares"] },
+            33: { nome: "Assistente Social", tipo: "Social", descricao: "Profissional que trabalha com políticas públicas e atendimento a indivíduos e famílias em situação de vulnerabilidade, promovendo direitos e inclusão social.", etapas: ["Concluir curso de Serviço Social (4-5 anos)", "Realizar estágios em equipamentos sociais", "Atuar em políticas públicas, ONGs ou instituições sociais", "Desenvolver projetos e intervenções comunitárias"] },
+            34: { nome: "Fonoaudiólogo", tipo: "Social", descricao: "Profissional que avalia e trata distúrbios da comunicação, voz e audição, atuando em reabilitação e promoção da comunicação humana.", etapas: ["Concluir curso de Fonoaudiologia (4-5 anos)", "Fazer estágio clínico e práticas em saúde", "Especializar-se em áreas como voz, linguagem ou audiologia", "Atuar em clínicas, escolas e hospitais"] },
+            35: { nome: "Técnico de Enfermagem", tipo: "Social", descricao: "Profissional que presta cuidados básicos de saúde, auxiliando em procedimentos, administração de medicamentos e suporte ao paciente em ambientes clínicos.", etapas: ["Concluir curso técnico de Enfermagem (2-3 anos)", "Realizar estágios práticos em hospitais e unidades básicas", "Obter registro profissional e cumprir normas sanitárias", "Atuar em hospitais, clínicas e atenção primária"] },
+            36: { nome: "Técnico em Radiologia", tipo: "Social", descricao: "Profissional que opera equipamentos de imagem médica para auxiliar no diagnóstico, garantindo qualidade e segurança nos procedimentos.", etapas: ["Concluir curso técnico em Radiologia (2-3 anos)", "Realizar estágio em clínicas e centros de diagnóstico", "Aprender protocolos de segurança radiológica", "Atuar em hospitais, clínicas e serviços de diagnóstico por imagem"] },
+            37: { nome: "Terapeuta Ocupacional", tipo: "Social", descricao: "Profissional que ajuda pacientes a recuperar ou desenvolver habilidades necessárias às atividades diárias após doenças, lesões ou desafios de desenvolvimento.", etapas: ["Concluir curso de Terapia Ocupacional (4-5 anos)", "Realizar estágio clínico e comunitário", "Especializar-se em reabilitação pediátrica, geriátrica ou psiquiátrica", "Atuar em hospitais, clínicas de reabilitação e escolas"] },
+            38: { nome: "Educador Físico", tipo: "Social", descricao: "Profissional que prescreve e orienta atividades físicas para promoção da saúde, desempenho esportivo e reabilitação, atuando em academias, clubes e escolas.", etapas: ["Concluir curso de Educação Física (4 anos)", "Obter registro no CREF e realizar estágios práticos", "Especializar-se em treinamento, saúde ou fisiologia", "Atuar como personal trainer, professor ou preparador físico"] },
+            39: { nome: "Psicopedagogo", tipo: "Social", descricao: "Profissional que estuda processos de aprendizagem e intervém em dificuldades escolares, integrando conhecimento pedagógico e psicológico.", etapas: ["Concluir curso de Psicopedagogia ou especialização (4 anos)", "Realizar práticas em escolas e clínicas", "Aplicar avaliações diagnósticas e programas de intervenção", "Atuar em escolas, clínicas e serviços de apoio pedagógico"] },
+            40: { nome: "Educador Social", tipo: "Social", descricao: "Profissional que desenvolve ações educativas e socioassistenciais com grupos em situação de vulnerabilidade, fortalecendo vínculos comunitários.", etapas: ["Concluir curso em Educação Social, Serviço Social ou Pedagogia (4 anos)", "Participar de estágios em projetos sociais", "Planejar e executar oficinas e atividades comunitárias", "Atuar em ONGs, projetos governamentais e instituições de assistência"] },
+
+            // Empreendedor (41-50)
+            41: { nome: "Consultor Empresarial", tipo: "Empreendedor", descricao: "Profissional que analisa processos, estrutura e estratégia de empresas para propor melhorias, aumentar eficiência e resultados.", etapas: ["Concluir graduação em Administração, Economia ou áreas afins (4 anos)", "Acumular experiência em gestão e projetos empresariais", "Obter certificações ou especializações em consultoria", "Atuar como consultor interno, em consultorias ou autônomo"] },
+            42: { nome: "Gestor de Projetos", tipo: "Empreendedor", descricao: "Profissional que planeja, coordena e acompanha projetos, garantindo entrega no prazo, escopo e orçamento definidos.", etapas: ["Concluir curso em Administração, Engenharia de Produção ou áreas correlatas (4 anos)", "Obter certificações como PMP ou cursos em metodologias ágeis", "Acumular experiência em gestão de projetos", "Atuar em empresas, startups ou como consultor de projetos"] },
+            43: { nome: "Franqueador", tipo: "Empreendedor", descricao: "Profissional que desenvolve modelos de negócio replicáveis e gerencia expansão por meio de franquias, padronizando processos e suporte.", etapas: ["Concluir graduação em Administração, Marketing ou áreas afins", "Desenvolver e testar modelo de negócio rentável", "Formalizar a franquia e oferecer suporte a franqueados", "Expandir por meio de marketing, operações e compliance"] },
+            44: { nome: "Empreendedor Digital", tipo: "Empreendedor", descricao: "Profissional que cria negócios online como lojas virtuais, cursos e serviços digitais, utilizando marketing, automação e análise de dados.", etapas: ["Aprender fundamentos de marketing digital e e-commerce", "Validar ideia com MVP e testes de mercado", "Criar presença online e canais de venda", "Escalar o negócio com tráfego pago, parcerias e automação"] },
+            45: { nome: "Criador de Conteúdo", tipo: "Empreendedor", descricao: "Profissional que produz material audiovisual, texto ou imagem para audiências online, monetizando através de parcerias, anúncios e produtos.", etapas: ["Definir nicho e público-alvo", "Desenvolver canal e rotina de produção de conteúdo", "Aprimorar edição, storytelling e distribuição", "Monetizar com patrocínios, afiliados e produtos próprios"] },
+            46: { nome: "Coach de Carreira", tipo: "Empreendedor", descricao: "Profissional que orienta indivíduos na tomada de decisões profissionais, planejamento e desenvolvimento de habilidades para alcançar objetivos de carreira.", etapas: ["Ter formação em áreas de humanas, preferencialmente com complementação em coaching", "Obter certificação em técnicas de coaching reconhecidas", "Atuar com atendimentos individuais e programas de desenvolvimento", "Construir reputação com casos de sucesso e networking"] },
+            47: { nome: "Especialista em Branding", tipo: "Empreendedor", descricao: "Profissional que cria e gerencia a imagem de marcas, definindo posicionamento, identidade visual e experiência do cliente.", etapas: ["Concluir curso em Marketing, Publicidade ou Design", "Desenvolver projetos de marca e portfólio", "Planejar estratégias de posicionamento e comunicação", "Atuar em agências, consultorias ou como freelancer de branding"] },
+            48: { nome: "Consultor de Inovação", tipo: "Empreendedor", descricao: "Profissional que auxilia organizações a implementar novas ideias, tecnologias e processos, impulsionando competitividade e transformação.", etapas: ["Concluir graduação em Administração, Engenharia ou áreas afins", "Aprimorar-se em metodologias de inovação (Design Thinking, Lean Startup)", "Conduzir projetos-piloto e parcerias com startups", "Atuar em consultorias, hubs de inovação ou internamente nas empresas"] },
+            49: { nome: "Planejador Financeiro", tipo: "Empreendedor", descricao: "Profissional que orienta indivíduos e empresas sobre organização financeira, investimentos e planejamento de longo prazo.", etapas: ["Concluir curso em Economia, Administração ou áreas afins", "Obter certificações em planejamento financeiro (ex.: CFP)", "Atuar com análises de portfólio e planejamento patrimonial", "Trabalhar em consultorias, bancos ou como autônomo"] },
+            50: { nome: "Desenvolvedor de Startups", tipo: "Empreendedor", descricao: "Profissional que concebe, desenvolve e escala novas empresas, coordenando equipe, produto, vendas e captação de recursos.", etapas: ["Desenvolver conhecimento em gestão, produto e tecnologia", "Criar MVP e testar modelo de negócios no mercado", "Buscar investimento e formar equipe multidisciplinar", "Escalar através de métricas, marketing e operações"] },
+
+            // Convencional (51-60)
+            51: { nome: "Contador", tipo: "Convencional", descricao: "Profissional responsável pela escrituração contábil, relatórios financeiros e cumprimento das obrigações fiscais e tributárias das empresas.", etapas: ["Concluir curso de Ciências Contábeis (4-5 anos)", "Obter registro no CRC e atualizar-se em legislação", "Atuar com demonstrações contábeis e fiscalizações", "Prestar consultoria fiscal e contábil para empresas"] },
+            52: { nome: "Advogado", tipo: "Convencional", descricao: "Profissional que interpreta e aplica leis, defendendo interesses de clientes em processos judiciais e prestando consultoria jurídica.", etapas: ["Concluir curso de Direito (5 anos)", "Passar no exame da OAB e obter registro profissional", "Fazer estágio em escritórios ou órgãos públicos", "Atuar em advocacia, consultoria ou carreira pública"] },
+            53: { nome: "Secretário Executivo", tipo: "Convencional", descricao: "Profissional que organiza rotinas administrativas, agendas e comunicação executiva, garantindo eficiência no suporte a lideranças.", etapas: ["Concluir curso técnico em Secretariado ou Administração (2-3 anos)", "Desenvolver habilidades em comunicação e organização", "Obter experiência em apoio a executivos e gestão de agendas", "Atuar em empresas privadas, sindicatos ou órgãos públicos"] },
+            54: { nome: "Analista de Recursos Humanos", tipo: "Convencional", descricao: "Profissional que gere processos de recrutamento, seleção, treinamento e desenvolvimento, alinhando pessoas à estratégia organizacional.", etapas: ["Concluir curso em Psicologia, Administração ou RH (4 anos)", "Realizar estágios em departamentos de RH", "Desenvolver conhecimento em legislação trabalhista e desenvolvimento humano", "Atuar em áreas de recrutamento, treinamento e clima organizacional"] },
+            55: { nome: "Auditor Interno", tipo: "Convencional", descricao: "Profissional que avalia processos, controles internos e conformidade, contribuindo para a governança e mitigação de riscos nas organizações.", etapas: ["Concluir graduação em Ciências Contábeis, Administração ou áreas afins", "Obter experiência em controles internos e auditoria", "Aprimorar-se em normas e compliance", "Atuar em auditoria interna, consultoria ou departamentos de risco"] },
+            56: { nome: "Técnico de Logística", tipo: "Convencional", descricao: "Profissional que organiza o fluxo de materiais, armazenagem e transporte, garantindo eficiência na cadeia de suprimentos.", etapas: ["Concluir curso técnico em Logística (1-2 anos)", "Realizar estágios em centros de distribuição", "Aprender sistemas de gestão de estoque e transporte", "Atuar em operações, planejamento ou coordenação logística"] },
+            57: { nome: "Gerente de Banco", tipo: "Convencional", descricao: "Profissional que supervisiona operações de agência, equipe de atendimento e metas comerciais, garantindo segurança e qualidade no serviço bancário.", etapas: ["Concluir graduação em Administração, Economia ou áreas relacionadas", "Ter experiência em produtos bancários e atendimento", "Desenvolver habilidade de liderança e compliance", "Atuar como gerente de agência ou gestor comercial"] },
+            58: { nome: "Consultor de Vendas", tipo: "Convencional", descricao: "Profissional que analisa processos comerciais, treina equipes e implementa estratégias para aumentar performance e conversões de vendas.", etapas: ["Concluir curso em Marketing, Administração ou áreas correlatas", "Acumular experiência em vendas e negociação", "Aprender técnicas de prospecção e CRM", "Atuar como consultor interno ou em consultorias comerciais"] },
+            59: { nome: "Recepcionista", tipo: "Convencional", descricao: "Profissional responsável pelo atendimento inicial ao cliente, controle de agendas e apoio administrativo, sendo porta de entrada da organização.", etapas: ["Concluir curso técnico em Secretariado ou Administração (1-2 anos)", "Desenvolver boas práticas de atendimento e comunicação", "Adquirir experiência em atendimentos presenciais e telefônicos", "Atuar em empresas, hotéis, clínicas e eventos como recepcionista"] },
+            60: { nome: "Supervisor de Produção", tipo: "Convencional", descricao: "Profissional que coordena equipes e processos produtivos, garantindo volume, qualidade e segurança no ambiente industrial.", etapas: ["Concluir curso em Engenharia de Produção, Administração ou técnico correlato", "Acumular experiência operacional na linha de produção", "Desenvolver habilidades em liderança e controle de qualidade", "Atuar como supervisor, coordenador ou gerente de produção"] }
+        };
+
+        function carregarDetalhesProfissao() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const profissaoId = parseInt(urlParams.get('id')) || 1;
+
+            const profissao = detalhesProfissoes[profissaoId];
+
+            if (profissao) {
+                document.getElementById('profissao-nome').textContent = profissao.nome;
+                document.getElementById('profissao-tipo').textContent = profissao.tipo;
+                document.getElementById('profissao-descricao').textContent = profissao.descricao;
+
+                const etapasList = document.getElementById('profissao-etapas');
+                etapasList.innerHTML = '';
+
+                profissao.etapas.forEach(etapa => {
+                    const li = document.createElement('li');
+                    li.textContent = etapa;
+                    etapasList.appendChild(li);
+                });
+
+                const voltarLink = document.getElementById('voltar-link');
+                voltarLink.href = `profissoes.html?aptidao=${getAptidaoId(profissaoId)}`;
+            }
+        }
+
+        function getAptidaoId(profissaoId) {
+            if (profissaoId <= 10) return 1;      // Investigativo
+            if (profissaoId <= 20) return 2;      // Realístico
+            if (profissaoId <= 30) return 3;      // Artístico
+            if (profissaoId <= 40) return 4;      // Social
+            if (profissaoId <= 50) return 5;      // Empreendedor
+            return 6;                             // Convencional
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarDetalhesProfissao);
+
+    </script>
+
+        <script>
+        // JavaScript para controlar os modais. obs: modais são esses quadrados que vão aparecendo 
+        // na tela em algumas ações, sendo essas o selecionar aptidões, entrar e cadastrar, 
+        // - ass: laurão <3
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos dos modais
+            const loginModal = document.getElementById('loginModal');
+            const cadastroModal = document.getElementById('cadastroModal');
+
+            // Botões de abrir
+            const openLoginBtn = document.getElementById('openLoginModal');
+            const openCadastroBtn = document.getElementById('openCadastroModal');
+
+            // Botões de fechar
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            const closeCadastroBtn = document.getElementById('closeCadastroModal');
+
+            // Links entre modais
+            const openCadastroFromLogin = document.getElementById('openCadastroFromLogin');
+            const openLoginFromCadastro = document.getElementById('openLoginFromCadastro');
+
+            // Função para abrir modal
+            function openModal(modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Função para fechar modal
+            function closeModal(modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Abrir modais
+            openLoginBtn.addEventListener('click', () => openModal(loginModal));
+            openCadastroBtn.addEventListener('click', () => openModal(cadastroModal));
+
+            // Fechar modais
+            closeLoginBtn.addEventListener('click', () => closeModal(loginModal));
+            closeCadastroBtn.addEventListener('click', () => closeModal(cadastroModal));
+
+            // Navegação entre modais de login/cadastro
+            openCadastroFromLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(loginModal);
+                openModal(cadastroModal);
+            });
+
+            openLoginFromCadastro.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(cadastroModal);
+                openModal(loginModal);
+            });
+
+            // Fechar modais ao clicar fora
+            [loginModal, cadastroModal].forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            // Fechar modais com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('show')) closeModal(loginModal);
+                    if (cadastroModal.classList.contains('show')) closeModal(cadastroModal);
+                }
+            });
+
+            function criarParticulas() {
+                const particulasContainer = document.getElementById('particulas');
+                const numeroParticulas = 20;
+                
+                for (let i = 0; i < numeroParticulas; i++) {
+                    const particula = document.createElement('div');
+                    particula.className = 'particula';
+                    particula.style.left = Math.random() * 100 + 'vw';
+                    particula.style.animationDelay = Math.random() * 20 + 's';
+                    particula.style.width = Math.random() * 4 + 2 + 'px';
+                    particula.style.height = particula.style.width;
+                    particulasContainer.appendChild(particula);
+                }
+            }
+            
+            criarParticulas();
+        });
+    </script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

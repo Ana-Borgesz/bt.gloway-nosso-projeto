@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloway - Sobre Nós</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        .sobre-container {
+            min-height: 100vh;
+            position: relative;
+            padding: 150px 30px 50px;
+        }
+
+        .sobre-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sobre-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .sobre-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .sobre-header p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .sobre-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .sobre-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .sobre-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--branco);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sobre-card h2 i {
+            font-size: 28px;
+        }
+
+        .sobre-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .equipe-section {
+            margin-top: 60px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .equipe-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .equipe-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .membro-card {
+            background: #ff6b7a;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 122, 0.4);
+        }
+
+        .membro-card:hover {
+            transform: translateY(-5px);
+            background: #ff7a87;
+            box-shadow: 0 15px 40px rgba(255, 107, 122, 0.6);
+        }
+
+        .membro-avatar {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: var(--branco);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--branco);
+        }
+        
+        .membro-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .membro-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--branco);
+            line-height: 1.3;
+        }
+
+        .membro-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            opacity: 0.95;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: var(--branco);
+        }
+
+        .funcao-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 5px;
+            backdrop-filter: blur(10px);
+            color: var(--branco);
+            font-weight: 500;
+        }
+
+        .sobre-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--branco), transparent);
+            margin: 40px 0;
+            border-radius: 1px;
+            opacity: 0.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sobre-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--branco), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .equipe-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sobre-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sobre-header h1 {
+                font-size: 32px;
+            }
+            
+            .sobre-card {
+                padding: 30px 20px;
+            }
+            
+            .equipe-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .membro-card {
+                min-height: 180px;
+                padding: 25px 15px;
+            }
+            
+            .membro-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .membro-card h3 {
+                font-size: 15px;
+            }
+            
+            .membro-card p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ondas-diagonais">
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+        <div class="onda-diagonal"></div>
+    </div>
+
+    <div class="brilho-interativo"></div>
+
+    <div class="particulas" id="particulas"></div>
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="cadastrar.html">Cadastrar</a></li>
+                        <li><a href="sobre.html" class="active">Sobre nós</a></li>
+                        <li><a href="questoes.php">Teste</a></li>
+                        <li><a href="aptidoes.html">Aptidões</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="sobre-container">
+        <div class="container">
+            <div class="sobre-content">
+                <div class="sobre-header">
+                    <h1>Sobre Nós</h1>
+                    <p>Conheça a equipe por trás do Gloway e nossa missão de ajudar jovens a descobrirem seu caminho profissional</p>
+                </div>
+
+                <div class="sobre-grid">
+                    <div class="sobre-card">
+                        <h2>Nossa História</h2>
+                        <p>Somos 4 estudantes que fazemos o curso de Informática para Internet. Desenvolvemos esse trabalho com o intuito de ajudar nosso meio - jovens sedentos de curiosidade e dúvidas sobre o que fazer e por onde começar.</p>
+                    </div>
+
+                    <div class="sobre-card">
+                        <h2>Nossa Missão</h2>
+                        <p>Dessa forma propomos um teste de aptidão que designa a uma área que se baseia nas respostas do usuário. Assim, mesmo sem uma profissão definida, a pessoa tem uma ideia da área que talvez possa seguir ou procurar mais sobre.</p>
+                    </div>
+
+                    <div class="sobre-card">
+                        <h2>Nosso Diferencial</h2>
+                        <p>Além disso, temos algumas profissões no nosso banco com conteúdos que podem ajudar aqueles que já sabem o que querem, mas não sabem por onde começam a estudar sobre, disponíveis na aba "Ver Profissões".</p>
+                    </div>
+
+                    <div class="sobre-card">
+                        <h2>Nossa Visão</h2>
+                        <p>Acreditamos que cada jovem merece ter acesso a ferramentas que facilitem sua decisão profissional. Combinamos tecnologia e psicologia vocacional para criar uma experiência única de autodescoberta.</p>
+                    </div>
+                </div>
+
+                <div class="equipe-section">
+                    <h2>Conheça Nossa Equipe</h2>
+                    <div class="equipe-grid">
+                        <div class="membro-card">
+                            <div class="membro-avatar">
+                                <img src="laura.jpeg" alt="Laura Ferreira Claudino" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmY2YjdhIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+TEY8L3RleHQ+Cjwvc3ZnPgo='">
+                            </div>
+                            <h3>Laura Ferreira Claudino</h3>
+                            <p>Front-end & Identidade Visual</p>
+                            <div class="funcao-tag">Design & UI/UX</div>
+                        </div>
+                        <div class="membro-card">
+                            <div class="membro-avatar">
+                                <img src="isa.jpeg" alt="Isabella Almeida dos Santos" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmY2YjdhIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+SVM8L3RleHQ+Cjwvc3ZnPgo='">
+                            </div>
+                            <h3>Isabella Almeida dos Santos</h3>
+                            <p>Front-end & Identidade Visual</p>
+                            <div class="funcao-tag">Design & UI/UX</div>
+                        </div>
+                        <div class="membro-card">
+                            <div class="membro-avatar">
+                                <img src="ana.jpeg" alt="Ana Beatriz Silva Borges" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmY2YjdhIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+QUI8L3RleHQ+Cjwvc3ZnPgo='">
+                            </div>
+                            <h3>Ana Beatriz Silva Borges</h3>
+                            <p>Back-end & Banco de Dados</p>
+                            <div class="funcao-tag">Desenvolvimento</div>
+                        </div>
+                        <div class="membro-card">
+                            <div class="membro-avatar">
+                                <img src="ju.jpeg" alt="Julia Matos de Lima Nogueira" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmY2YjdhIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+Skw8L3RleHQ+Cjwvc3ZnPgo='">
+                            </div>
+                            <h3>Julia Matos de Lima Nogueira</h3>
+                            <p>Back-end & Banco de Dados</p>
+                            <div class="funcao-tag">Desenvolvimento</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript para controlar os modais. obs: modais são esses quadrados que vão aparecendo 
+        // na tela em algumas ações, sendo essas o selecionar aptidões, entrar e cadastrar, 
+        // - ass: laurão <3
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos dos modais
+            const loginModal = document.getElementById('loginModal');
+            const cadastroModal = document.getElementById('cadastroModal');
+
+            // Botões de abrir
+            const openLoginBtn = document.getElementById('openLoginModal');
+            const openCadastroBtn = document.getElementById('openCadastroModal');
+
+            // Botões de fechar
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            const closeCadastroBtn = document.getElementById('closeCadastroModal');
+
+            // Links entre modais
+            const openCadastroFromLogin = document.getElementById('openCadastroFromLogin');
+            const openLoginFromCadastro = document.getElementById('openLoginFromCadastro');
+
+            // Função para abrir modal
+            function openModal(modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Função para fechar modal
+            function closeModal(modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Abrir modais
+            openLoginBtn.addEventListener('click', () => openModal(loginModal));
+            openCadastroBtn.addEventListener('click', () => openModal(cadastroModal));
+
+            // Fechar modais
+            closeLoginBtn.addEventListener('click', () => closeModal(loginModal));
+            closeCadastroBtn.addEventListener('click', () => closeModal(cadastroModal));
+
+            // Navegação entre modais de login/cadastro
+            openCadastroFromLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(loginModal);
+                openModal(cadastroModal);
+            });
+
+            openLoginFromCadastro.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal(cadastroModal);
+                openModal(loginModal);
+            });
+
+            // Fechar modais ao clicar fora
+            [loginModal, cadastroModal].forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                    }
+                });
+            });
+
+            // Fechar modais com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('show')) closeModal(loginModal);
+                    if (cadastroModal.classList.contains('show')) closeModal(cadastroModal);
+                }
+            });
+
+            function criarParticulas() {
+                const particulasContainer = document.getElementById('particulas');
+                const numeroParticulas = 20;
+                
+                for (let i = 0; i < numeroParticulas; i++) {
+                    const particula = document.createElement('div');
+                    particula.className = 'particula';
+                    particula.style.left = Math.random() * 100 + 'vw';
+                    particula.style.animationDelay = Math.random() * 20 + 's';
+                    particula.style.width = Math.random() * 4 + 2 + 'px';
+                    particula.style.height = particula.style.width;
+                    particulasContainer.appendChild(particula);
+                }
+            }
+            
+            criarParticulas();
+        });
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
