@@ -17,6 +17,7 @@ Existem duas maneiras de obter o projeto:
 Se você tiver o Git instalado, abra o terminal e rode:
 ```bash
 git clone https://github.com/Ana-Borgesz/bt.gloway-nosso-projeto.git
+```
 
 3. Testar o projeto
 
@@ -24,25 +25,31 @@ git clone https://github.com/Ana-Borgesz/bt.gloway-nosso-projeto.git
 Certifique-se de ter o Docker instalado.
 
 Entre na pasta do projeto no terminal:
-bash
 
 Copiar código
+```bash
 cd bt.gloway-nosso-projeto
+```
 
 Construa a imagem Docker:
-bash
 
 Copiar código
+```bash
 docker build -t glowaybt.bt:v1 .
+```
 
 Rode o container:
-bash
 
 Copiar código
+```bash
 docker run -p 8080:80 glowaybt.bt:v1
+```
 
 Abra o navegador e acesse:
 arduino
 
 Copiar código
+
+```bash
 http://localhost:8080
+```
