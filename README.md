@@ -39,14 +39,14 @@ Construa a imagem Docker:
 
 Copiar código
 ```bash
-docker build -t glowaybt.bt:v1 .
+docker build -t glowaybt.g:v1 .
 ```
 
 Rode o container:
 
 Copiar código:
 ```bash
-docker run -p 8080:80 glowaybt.bt:v1
+docker run -p 3000:80 glowaybt.g:v1
 ```
 
 Abra o navegador e acesse:
@@ -55,5 +55,5 @@ arduino
 Copiar código:
 
 ```bash
-http://localhost:8080
+http://localhost:3000
 ```
