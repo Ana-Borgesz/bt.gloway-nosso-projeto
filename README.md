@@ -1,4 +1,6 @@
-Gloway - Encontre a sua luz!
+Gloway é uma plataforma moderna de teste de aptidão e autoconhecimento que ajuda você a descobrir seus talentos, preferências e potenciais caminhos profissionais. Através de perguntas intuitivas e análises personalizadas, o site revela seus pontos fortes e áreas de desenvolvimento, guiando você com clareza e confiança.
+
+Com o slogan “Encontre a sua luz”, o Gloway propõe justamente isso: iluminar quem você é e quem pode se tornar, ajudando você a tomar decisões mais conscientes sobre estudos, carreira e propósito.
  
 Como acessar e testar este projeto este projeto está hospedado no GitHub e qualquer pessoa pode visualizá-lo e testá-lo localmente.
 
@@ -26,7 +28,7 @@ Certifique-se de ter o Docker instalado.
 
 Entre na pasta do projeto no terminal:
 
-Copiar código
+Copiar código:
 ```bash
 cd bt.gloway-nosso-projeto
 ```
@@ -40,7 +42,7 @@ docker build -t glowaybt.bt:v1 .
 
 Rode o container:
 
-Copiar código
+Copiar código:
 ```bash
 docker run -p 8080:80 glowaybt.bt:v1
 ```
@@ -48,7 +50,7 @@ docker run -p 8080:80 glowaybt.bt:v1
 Abra o navegador e acesse:
 arduino
 
-Copiar código
+Copiar código:
 
 ```bash
 http://localhost:8080
